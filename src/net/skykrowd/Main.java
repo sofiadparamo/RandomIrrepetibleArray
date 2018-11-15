@@ -3,57 +3,56 @@ package net.skykrowd;
 import java.util.Random;
 
 public class Main {
-
-    private static Random r = new Random();
-
+    
+    private static Random rand=new Random();
+    
     public static void main(String[] args) {
-        int ren=r.nextInt(5)+3;
-        int col=r.nextInt(5)+3;
-        int mat[][] = new int [ren][col];
-
+        int n,r;
+        n=rand.nextInt(6)+3;
+        r=rand.nextInt(6)+3;
+        int mat[][]=new int [n][r];
+        
+        
         llenar(mat);
         mostrar(mat);
     }
-
-
-    private static void llenar(int mat[][]){
-        int ren, col, n;
-
-        for(ren=0;ren<mat.length;ren++){
-            for(col=0;col<mat[ren].length;col++){
-                n=r.nextInt(mat.length*mat[col].length)+1;
-                if(!verificar(n, mat, ren, col))
-                    mat[ren][col]=n;
-                else
-                    col--;
+ 
+    private static void llenar(int a[][]){
+        int ren,col,num;
+        for(ren=0;ren<a.length;ren++){
+            for(col=0;col<a[ren].length;col++){
+            num=rand.nextInt(a.length*a[0].length)+1;
+            if (verificar(num,a,ren,col)==false)
+                a[ren][col]=num;
+            else 
+                col--;
             }
         }
     }
-
-    private static boolean verificar(int n, int mat[][], int ren, int col){
+    
+    
+    private static boolean verificar(int n,int a[][],int ren,int col){
         boolean ver=false;
         int r,c;
-        for(r=0; r<=ren && !ver; r++){
-            for(c=0;c<=col && !ver;c++){
-                if(n==mat[r][c])
+        for(r=0;r<a.length&&ver==false;r++){
+            for(c=0;c<a[r].length&&ver==false&&a[r][c]!=0;c++){
+                if (a[r][c]==n){
                     ver=true;
+                }
             }
         }
-
-
         return ver;
     }
-
-    private static void mostrar(int mat[][]){
-        int r,c;
-        for(r=0;r<mat.length;r++){
-            for(c=0;c<mat[r].length;c++){
-                System.out.print(mat[r][c]+"\t");
+    
+    
+    private static void mostrar(int a[][]){
+        int ren,col;
+        for(ren=0;ren<a.length;ren++){
+            for(col=0;col<a[ren].length;col++){
+                System.out.print(a[ren][col]+"\t");
             }
             System.out.print("\n");
-
         }
-
     }
-}
 
+}
